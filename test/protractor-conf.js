@@ -6,12 +6,13 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'hostName': 'complexwidget.com'
   },
 
   chromeOnly: true,
 
-  baseUrl: 'http://localhost:8000/',
+  baseUrl: 'http://localhost',
 
   framework: 'jasmine',
 
