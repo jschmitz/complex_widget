@@ -1,0 +1,23 @@
+<html ng-app="complexwidgetApp">
+  <head>
+    <title>Testing</title>
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="app/js/controller.js"></script>
+  </head>
+  <body ng-controller="ComplexWidgetListController">
+    <h1>Yo yo lets name and description</h1>
+    <p>
+      Name
+    </p>
+    <p>
+      Description
+    </p>
+    <ul>
+      <li ng-repeat="widget in widgets">
+        <span>{{widget.name}}</span>
+        <p>{{widget.snippet}}</p>
+      </li>
+    </ul>
+  </body>
+</html>
+
