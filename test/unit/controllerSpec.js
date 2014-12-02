@@ -1,12 +1,27 @@
 'use strict'
 
 describe('ComplexWigetListController', function(){
+  var scope, ctrl, $httpBackend;
   beforeEach(module('complexwidgetApp'));
 
-  it('should create "widget" model with 2 widgets', inject(function($controller){
-    var scope = {},
-        ctrl = $controller('ComplexWidgetListController', {$scope:scope});
+  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+    $httpBackend = _$httpBackend_;
 
-    expect(scope.widgets.length).toBe(2);
+    scope = $rootScope.$new();
+    ctrl = $controller('ComplexWidgetListController', {$scope: scope});
   }));
+
+  it('should create "widget" model with 2 widgets', function(){
+    $httpBackend.expectGET('app/widgets/widgets.json').
+        respond([{name: 'tonka'}, {name: 'JD'}]);
+    $httpBackend.flush();
+    expect(scope.widgets.length).toBe(2);
+  });
+
+  it('should create "widget" model with 2 widgets', function(){
+    $httpBackend.expectGET('app/widgets/widgets.json').
+        respond(404, '');
+    $httpBackend.flush();
+    expect(scope.friendlyErrorMessage).toBeDefined();
+  });
 });
