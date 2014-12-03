@@ -1,4 +1,7 @@
-<h1>Yo yo lets name and description</h1>
+<h1>Widget List</h1>
+<div>
+  <a href="/#/widgets/new" id="newWidgetLink">New Widget</a>
+</div>
 <p>
   {{ friendlyErrorMessage }}
 </p>
@@ -10,7 +13,7 @@
 </p>
 <ul>
   <li ng-repeat="widget in widgets">
-    <span>{{widget.name}}</span>
+    <a ng-href="/#/widgets/{{widget.id}}"><span>{{widget.name}}</span></a>
     <p>{{widget.description}}</p>
   </li>
 </ul>

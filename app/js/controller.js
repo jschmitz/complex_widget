@@ -22,3 +22,8 @@ complexwidgetControllers.controller('ComplexWidgetDetailController', ['$scope', 
   function($scope, $routeParams) {
     $scope.widgetId = $routeParams.widgetId;
 }]);
+
+complexwidgetControllers.controller('ComplexWidgetNewController', ['$scope',
+  function($scope) {
+    //Add some functionality here Jake
+}]);
