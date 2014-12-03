@@ -45,7 +45,7 @@ describe('Complex Widget App', function() {
 
     it('should display placeholder page with widgetId', function() {
       browser.get('/#/widgets/tonka');
-      expect(element(by.binding('widgetId')).getText()).toBe('tonka yo');
+      expect(element(by.binding('widgetId')).getText()).toBe('tonka');
     });
 
     it('should link to the list view', function() {

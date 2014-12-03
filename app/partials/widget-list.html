@@ -1,19 +1,23 @@
+<p>
+  {{ friendlyErrorMessage }}
+</p>
 <h1>Widget List</h1>
 <div>
   <a href="/#/widgets/new" id="newWidgetLink">New Widget</a>
 </div>
-<p>
-  {{ friendlyErrorMessage }}
-</p>
-<p>
-  Name
-</p>
-<p>
-  Description
-</p>
-<ul>
-  <li ng-repeat="widget in widgets">
-    <a ng-href="/#/widgets/{{widget.id}}"><span>{{widget.name}}</span></a>
-    <p>{{widget.description}}</p>
-  </li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="widget in widgets">
+      <td>
+        <a ng-href="/#/widgets/{{widget.id}}">{{widget.name}}</a>
+      </td>
+      <td>{{widget.description}}</td>
+    </tr>
+  </tbody>
+</table>
