@@ -53,6 +53,13 @@ describe('Complex Widget App', function() {
       element(by.id('widgetListLink')).click();
       expect(browser.getCurrentUrl()).not.toEqual(widgetsURL);
     });
+
+    it('should allow deletion', function(){
+      element(by.id('deleteWidget')).click();
+      var alertDialog = browser.switchTo().alert();
+      alertDialog.accept();
+      expect(element(by.css('body > div > h1')).getText()).toContain('Widget List');
+    });
   });
 
   describe('New Widget', function() {
