@@ -10,9 +10,9 @@ exports.config = {
     'hostName': 'complexwidget.com'
   },
 
-  chromeOnly: true,
+  directConnect: true,
 
-  baseUrl: 'http://localhost',
+  baseUrl: 'http://localhost:8080',
 
   framework: 'jasmine',
 

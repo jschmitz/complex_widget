@@ -1,27 +1,13 @@
 <html ng-app="complexwidgetApp">
   <head>
     <title>Testing</title>
-    <script src="/node_modules/angular/angular.js"></script>
-    <script src="/node_modules/angular-router/angular-router.js"></script>
-    <script src="app/js/controller.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller.js"></script>
   </head>
-  <body ng-controller="ComplexWidgetListController">
-    <h1>Yo yo lets name and description</h1>
-    <p>
-      {{ friendlyErrorMessage }}
-    </p>
-    <p>
-      Name
-    </p>
-    <p>
-      Description
-    </p>
-    <ul>
-      <li ng-repeat="widget in widgets">
-        <span>{{widget.name}}</span>
-        <p>{{widget.description}}</p>
-      </li>
-    </ul>
+  <body>
+    <div ng-view></div>
   </body>
 </html>
 

@@ -1,9 +1,9 @@
 'use strict'
 
-var complexwidgetApp = angular.module('complexwidgetApp', []);
+var complexwidgetControllers = angular.module('complexwidgetControllers', []);
 
-complexwidgetApp.controller('ComplexWidgetListController', ['$scope', '$http', function($scope, $http){
-  var requestString = 'app/widgets/widgets.json';
+complexwidgetControllers.controller('ComplexWidgetListController', ['$scope', '$http', function($scope, $http){
+  var requestString = 'widgets/widgets.json';
 
   $http.get(requestString).
   success(function(data){
@@ -16,4 +16,9 @@ complexwidgetApp.controller('ComplexWidgetListController', ['$scope', '$http', f
                       "\n partial request string: " +
                       requestString);
   });
+}]);
+
+complexwidgetControllers.controller('ComplexWidgetDetailController', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.widgetId = $routeParams.widgetId;
 }]);

@@ -1,4 +1,4 @@
 [
-  {"name": "tonka truck",  "description": "a trucks truck"},
-  {"name": "john deere A", "description": "green goodness"}
+  {"id":"tonka", "name": "tonka truck",  "description": "a trucks truck"},
+  {"id":"john deere", "name": "john deere A", "description": "green goodness"}
 ]

@@ -12,14 +12,14 @@ describe('ComplexWigetListController', function(){
   }));
 
   it('should create "widget" model with 2 widgets', function(){
-    $httpBackend.expectGET('app/widgets/widgets.json').
+    $httpBackend.expectGET('widgets/widgets.json').
         respond([{name: 'tonka'}, {name: 'JD'}]);
     $httpBackend.flush();
     expect(scope.widgets.length).toBe(2);
   });
 
   it('should create "widget" model with 2 widgets', function(){
-    $httpBackend.expectGET('app/widgets/widgets.json').
+    $httpBackend.expectGET('widgets/widgets.json').
         respond(404, '');
     $httpBackend.flush();
     expect(scope.friendlyErrorMessage).toBeDefined();
