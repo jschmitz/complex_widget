@@ -27,3 +27,9 @@ complexwidgetControllers.controller('ComplexWidgetNewController', ['$scope',
   function($scope) {
     //Add some functionality here Jake
 }]);
+
+complexwidgetControllers.directive('ofsLinktoWidgetsIndex', function(){
+  return {
+    templateUrl: 'partials/linkto-widgets-index.html'
+  };
+});
