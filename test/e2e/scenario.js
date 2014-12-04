@@ -1,6 +1,8 @@
 'use strict';
 
-/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
+var WidgetList = require('./pages/widget_list');
+var WidgetNew = require('./pages/widget_new');
+var WidgetDetail = require('./pages/widget_detail');
 
 describe('Complex Widget App', function() {
 
@@ -77,61 +79,3 @@ describe('Complex Widget App', function() {
     });
   });
 });
-
-var WidgetNew = function(){
-  this.get = function(){
-    browser.get('/#/widgets/new');
-  };
-
-  this.clickList = function(){
-    element(by.id('widgetListLink')).click();
-  };
-};
-
-var WidgetList = function(){
-  this.widgets = element.all(by.repeater('widget in widgets'));
-
-  this.currentUrl = function(){
-    browser.getCurrentUrl();
-  }
-
-  this.get = function(){
-    browser.get('/#/widgets');
-  };
-
-  this.getAppRoot = function(){
-    browser.get('index.html');
-  };
-
-  this.clickFirstWidget = function(){
-    element(by.repeater('widget in widgets').row(0).column('name')).click();
-  };
-
-  this.clickNew = function(){
-    element(by.id('newWidgetLink')).click();
-  };
-
-  this.checkWidgetCount = function(){
-    expect(this.widgets.count()).toBe(2);
-  };
-};
-
-var WidgetDetail = function(){
-  this.get = function(){
-    browser.get('/#/widgets/tonka');
-  };
-
-  this.clickList = function(){
-    element(by.id('widgetListLink')).click();
-  };
-
-  this.clickDelete = function(){
-    element(by.id('deleteWidget')).click();
-    var alertDialog = browser.switchTo().alert();
-      alertDialog.accept();
-  };
-
-  this.checkDetails = function(){
-    expect(element(by.binding('widgetId')).getText()).toBe('tonka');
-  };
-};
