@@ -5,72 +5,133 @@
 describe('Complex Widget App', function() {
 
   describe('Widget list view', function() {
+    var widgetList;
+    var widgetDetail;
 
-    beforeEach(function() {
-      browser.get('/#/widgets');
+    beforeEach(function(){
+      widgetList = new WidgetList();
+      widgetDetail = new WidgetDetail();
+      widgetList.get();
     });
 
-    it('should show 2 widgets', function() {
-      var widgets = element.all(by.repeater('widget in widgets'));
-      expect(widgets.count()).toBe(2);
+    it('should list 2 widgets', function() {
+      widgetList.checkWidgetCount();
     });
 
-    it('should redirect index.html to <domain>#/widgets', function() {
-      browser.get('index.html');
+    it('should redirect the app root to the widget list', function() {
+      widgetList.getAppRoot();
       browser.getLocationAbsUrl().then(function(url) {
           expect(url.split('#')[0]).toBe('/widgets');
       });
     });
 
     it('should link to the detail view', function() {
-      var widgetsURL = browser.getCurrentUrl();
-
-      var widgetName = element(by.repeater('widget in widgets').row(0).column('name'));
-      widgetName.click();
-
-      expect(browser.getCurrentUrl()).not.toEqual(widgetsURL);
+      widgetList.clickFirstWidget();
+      widgetDetail.checkDetails();
     });
 
     it('should link to the new widget view', function() {
-      var widgetsURL = browser.getCurrentUrl();
-      element(by.id('newWidgetLink')).click();
+      widgetList.clickNew();
       expect(element(by.css('body > div')).getText()).toContain('Create New Widget');
     });
   });
 
   describe('Widget detail view', function() {
+    var widgetDetail;
+    var widgetList;
+
     beforeEach(function() {
-      browser.get('/#/widgets/tonka');
+      widgetDetail = new WidgetDetail();
+      widgetList = new WidgetList();
+      widgetDetail.get();
     });
 
-    it('should display placeholder page with widgetId', function() {
-      browser.get('/#/widgets/tonka');
-      expect(element(by.binding('widgetId')).getText()).toBe('tonka');
+    it('should display detail page with widgetId', function() {
+      widgetDetail.checkDetails();
     });
 
     it('should link to the list view', function() {
-      var widgetsURL = browser.getCurrentUrl();
-      element(by.id('widgetListLink')).click();
-      expect(browser.getCurrentUrl()).not.toEqual(widgetsURL);
+      widgetDetail.clickList();
+      widgetList.checkWidgetCount();
     });
 
     it('should allow deletion', function(){
-      element(by.id('deleteWidget')).click();
-      var alertDialog = browser.switchTo().alert();
-      alertDialog.accept();
-      expect(element(by.css('body > div > h1')).getText()).toContain('Widget List');
+      widgetDetail.clickDelete();
+      widgetList.checkWidgetCount();
     });
   });
 
   describe('New Widget', function() {
+    var widgetNew;
+    var widgetList;
+
     beforeEach(function() {
-      browser.get('/#/widgets/new');
+      widgetNew = new WidgetNew();
+      widgetList = new WidgetList();
+      widgetNew.get();
     });
 
     it('should link to the list view', function() {
-      var widgetsURL = browser.getCurrentUrl();
-      element(by.id('widgetListLink')).click();
-      expect(element(by.css('body > div > h1')).getText()).toContain('Widget List');
+      widgetNew.clickList();
+      widgetList.checkWidgetCount();
     });
   });
 });
+
+var WidgetNew = function(){
+  this.get = function(){
+    browser.get('/#/widgets/new');
+  };
+
+  this.clickList = function(){
+    element(by.id('widgetListLink')).click();
+  };
+};
+
+var WidgetList = function(){
+  this.widgets = element.all(by.repeater('widget in widgets'));
+
+  this.currentUrl = function(){
+    browser.getCurrentUrl();
+  }
+
+  this.get = function(){
+    browser.get('/#/widgets');
+  };
+
+  this.getAppRoot = function(){
+    browser.get('index.html');
+  };
+
+  this.clickFirstWidget = function(){
+    element(by.repeater('widget in widgets').row(0).column('name')).click();
+  };
+
+  this.clickNew = function(){
+    element(by.id('newWidgetLink')).click();
+  };
+
+  this.checkWidgetCount = function(){
+    expect(this.widgets.count()).toBe(2);
+  };
+};
+
+var WidgetDetail = function(){
+  this.get = function(){
+    browser.get('/#/widgets/tonka');
+  };
+
+  this.clickList = function(){
+    element(by.id('widgetListLink')).click();
+  };
+
+  this.clickDelete = function(){
+    element(by.id('deleteWidget')).click();
+    var alertDialog = browser.switchTo().alert();
+      alertDialog.accept();
+  };
+
+  this.checkDetails = function(){
+    expect(element(by.binding('widgetId')).getText()).toBe('tonka');
+  };
+};
